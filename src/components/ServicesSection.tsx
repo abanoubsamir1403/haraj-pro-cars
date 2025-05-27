@@ -1,8 +1,32 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const ServicesSection = () => {
+  const { toast } = useToast();
+
+  const handleRequestService = (serviceName: string) => {
+    toast({
+      title: "طلب الخدمة",
+      description: `سيتم إضافة نموذج طلب خدمة ${serviceName} قريباً`,
+    });
+  };
+
+  const handleContactUs = () => {
+    toast({
+      title: "تواصل معنا",
+      description: "سيتم إضافة صفحة التواصل قريباً",
+    });
+  };
+
+  const handleFAQ = () => {
+    toast({
+      title: "الأسئلة الشائعة",
+      description: "سيتم إضافة صفحة الأسئلة الشائعة قريباً",
+    });
+  };
+
   const services = [
     {
       id: 1,
@@ -94,7 +118,10 @@ const ServicesSection = () => {
                   ))}
                 </div>
 
-                <Button className="w-full cars-gradient text-white hover:shadow-lg">
+                <Button 
+                  className="w-full cars-gradient text-white hover:shadow-lg"
+                  onClick={() => handleRequestService(service.title)}
+                >
                   اطلب الخدمة
                 </Button>
               </CardContent>
@@ -111,10 +138,17 @@ const ServicesSection = () => {
               فريق خدمة العملاء متاح 24/7 لمساعدتك في جميع استفساراتك
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-primary-600 hover:bg-gray-100">
+              <Button 
+                className="bg-white text-primary-600 hover:bg-gray-100"
+                onClick={handleContactUs}
+              >
                 تواصل معنا
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary-600">
+              <Button 
+                variant="outline" 
+                className="border-white text-white hover:bg-white hover:text-primary-600"
+                onClick={handleFAQ}
+              >
                 الأسئلة الشائعة
               </Button>
             </div>

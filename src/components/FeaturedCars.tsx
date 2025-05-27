@@ -1,8 +1,32 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 
 const FeaturedCars = () => {
+  const { toast } = useToast();
+
+  const handleViewDetails = (carName: string) => {
+    toast({
+      title: "عرض التفاصيل",
+      description: `سيتم إضافة صفحة تفاصيل ${carName} قريباً`,
+    });
+  };
+
+  const handleCallNow = (carName: string) => {
+    toast({
+      title: "اتصل الآن",
+      description: `سيتم إضافة رقم الهاتف لـ ${carName} قريباً`,
+    });
+  };
+
+  const handleViewAllCars = () => {
+    toast({
+      title: "جميع السيارات",
+      description: "سيتم إضافة صفحة جميع السيارات قريباً",
+    });
+  };
+
   const featuredCars = [
     {
       id: 1,
@@ -132,10 +156,17 @@ const FeaturedCars = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <Button className="flex-1 cars-gradient text-white hover:shadow-lg">
+                  <Button 
+                    className="flex-1 cars-gradient text-white hover:shadow-lg"
+                    onClick={() => handleViewDetails(`${car.brand} ${car.model}`)}
+                  >
                     عرض التفاصيل
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    className="flex-1"
+                    onClick={() => handleCallNow(`${car.brand} ${car.model}`)}
+                  >
                     اتصل الآن
                   </Button>
                 </div>
@@ -145,7 +176,10 @@ const FeaturedCars = () => {
         </div>
 
         <div className="text-center">
-          <Button className="px-8 py-3 text-lg cars-gradient text-white hover:shadow-lg">
+          <Button 
+            className="px-8 py-3 text-lg cars-gradient text-white hover:shadow-lg"
+            onClick={handleViewAllCars}
+          >
             عرض جميع السيارات
           </Button>
         </div>

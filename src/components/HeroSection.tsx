@@ -3,9 +3,38 @@ import { Button } from "@/components/ui/button";
 import { Search } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { useState } from 'react';
+import { useToast } from "@/hooks/use-toast";
 
 const HeroSection = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
+  const [city, setCity] = useState('');
+  const [price, setPrice] = useState('');
+  const { toast } = useToast();
+
+  const handleAdvancedSearch = () => {
+    if (!brand && !model && !city && !price && !searchTerm) {
+      toast({
+        title: "تنبيه",
+        description: "يرجى اختيار معايير البحث أولاً",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const searchCriteria = [];
+    if (brand) searchCriteria.push(`الماركة: ${brand}`);
+    if (model) searchCriteria.push(`الموديل: ${model}`);
+    if (city) searchCriteria.push(`المدينة: ${city}`);
+    if (price) searchCriteria.push(`السعر: ${price}`);
+    if (searchTerm) searchCriteria.push(`البحث: ${searchTerm}`);
+
+    toast({
+      title: "جاري البحث",
+      description: `معايير البحث: ${searchCriteria.join(' - ')}`,
+    });
+  };
 
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
@@ -37,7 +66,11 @@ const HeroSection = () => {
           <h3 className="text-xl font-semibold text-gray-800 mb-4">ابحث عن سيارتك المثالية</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-            <select className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <select 
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+              className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            >
               <option value="">اختر الماركة</option>
               <option value="toyota">تويوتا</option>
               <option value="hyundai">هيونداي</option>
@@ -51,7 +84,11 @@ const HeroSection = () => {
               <option value="audi">أودي</option>
             </select>
 
-            <select className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <select 
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            >
               <option value="">الموديل</option>
               <option value="2024">2024</option>
               <option value="2023">2023</option>
@@ -62,7 +99,11 @@ const HeroSection = () => {
               <option value="2018">2018</option>
             </select>
 
-            <select className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <select 
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            >
               <option value="">المدينة</option>
               <option value="riyadh">الرياض</option>
               <option value="jeddah">جدة</option>
@@ -73,7 +114,11 @@ const HeroSection = () => {
               <option value="taif">الطائف</option>
             </select>
 
-            <select className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+            <select 
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            >
               <option value="">السعر</option>
               <option value="0-50000">أقل من 50,000 ريال</option>
               <option value="50000-100000">50,000 - 100,000 ريال</option>
@@ -90,11 +135,15 @@ const HeroSection = () => {
                 placeholder="ابحث بكلمات مفتاحية..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleAdvancedSearch()}
                 className="w-full pl-12 pr-4 py-3 text-lg border-2 border-gray-200 rounded-lg focus:border-primary-500"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             </div>
-            <Button className="px-8 py-3 text-lg cars-gradient text-white hover:shadow-lg transition-all">
+            <Button 
+              className="px-8 py-3 text-lg cars-gradient text-white hover:shadow-lg transition-all"
+              onClick={handleAdvancedSearch}
+            >
               ابحث الآن
             </Button>
           </div>
