@@ -4,25 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, User, Menu, X } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { toast } = useToast();
-
-  const handleLogin = () => {
-    toast({
-      title: "تسجيل الدخول",
-      description: "سيتم إضافة صفحة تسجيل الدخول قريباً",
-    });
-  };
-
-  const handleRegister = () => {
-    toast({
-      title: "حساب جديد",
-      description: "سيتم إضافة صفحة إنشاء حساب جديد قريباً",
-    });
-  };
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -39,27 +26,6 @@ const Header = () => {
     }
   };
 
-  const handleMyAccount = () => {
-    toast({
-      title: "حسابي",
-      description: "سيتم إضافة صفحة الحساب الشخصي قريباً",
-    });
-  };
-
-  const handleAddListing = () => {
-    toast({
-      title: "أضف إعلانك",
-      description: "سيتم إضافة صفحة إضافة الإعلانات قريباً",
-    });
-  };
-
-  const handleNavigation = (page: string) => {
-    toast({
-      title: `${page}`,
-      description: `سيتم إضافة صفحة ${page} قريباً`,
-    });
-  };
-
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
@@ -69,19 +35,23 @@ const Header = () => {
             مرحباً بك في موقع السيارات الأول في المملكة
           </div>
           <div className="flex gap-4">
-            <Button variant="ghost" size="sm" onClick={handleLogin}>تسجيل دخول</Button>
-            <Button variant="ghost" size="sm" onClick={handleRegister}>حساب جديد</Button>
+            <Link to="/login">
+              <Button variant="ghost" size="sm">تسجيل دخول</Button>
+            </Link>
+            <Link to="/register">
+              <Button variant="ghost" size="sm">حساب جديد</Button>
+            </Link>
           </div>
         </div>
 
         {/* Main Header */}
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
-          <div className="flex items-center cursor-pointer" onClick={() => handleNavigation('الرئيسية')}>
+          <Link to="/" className="flex items-center cursor-pointer">
             <div className="cars-gradient text-white rounded-lg p-3 text-2xl font-bold">
               السيارات
             </div>
-          </div>
+          </Link>
 
           {/* Search Bar - Desktop */}
           <div className="hidden md:flex flex-1 max-w-2xl mx-8">
@@ -103,14 +73,18 @@ const Header = () => {
 
           {/* User Menu & Mobile Menu Button */}
           <div className="flex items-center gap-4">
-            <Button variant="outline" className="hidden md:flex items-center gap-2" onClick={handleMyAccount}>
-              <User className="w-4 h-4" />
-              حسابي
-            </Button>
+            <Link to="/my-account">
+              <Button variant="outline" className="hidden md:flex items-center gap-2">
+                <User className="w-4 h-4" />
+                حسابي
+              </Button>
+            </Link>
             
-            <Button className="hidden md:inline-flex cars-gradient text-white" onClick={handleAddListing}>
-              أضف إعلانك
-            </Button>
+            <Link to="/add-listing">
+              <Button className="hidden md:inline-flex cars-gradient text-white">
+                أضف إعلانك
+              </Button>
+            </Link>
 
             {/* Mobile Menu Button */}
             <Button
@@ -127,24 +101,24 @@ const Header = () => {
         {/* Navigation */}
         <nav className="hidden md:flex border-t border-gray-100 py-3">
           <div className="flex gap-8">
-            <button onClick={() => handleNavigation('الرئيسية')} className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            <Link to="/" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
               الرئيسية
-            </button>
-            <button onClick={() => handleNavigation('سيارات للبيع')} className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            </Link>
+            <Link to="/cars-for-sale" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
               سيارات للبيع
-            </button>
-            <button onClick={() => handleNavigation('سيارات جديدة')} className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            </Link>
+            <Link to="/new-cars" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
               سيارات جديدة
-            </button>
-            <button onClick={() => handleNavigation('سيارات مستعملة')} className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            </Link>
+            <Link to="/used-cars" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
               سيارات مستعملة
-            </button>
-            <button onClick={() => handleNavigation('قطع غيار')} className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            </Link>
+            <Link to="/spare-parts" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
               قطع غيار
-            </button>
-            <button onClick={() => handleNavigation('خدمات')} className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            </Link>
+            <Link to="/services" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
               خدمات
-            </button>
+            </Link>
           </div>
         </nav>
 
@@ -168,22 +142,27 @@ const Header = () => {
 
             {/* Mobile Navigation Links */}
             <div className="flex flex-col space-y-2">
-              <button onClick={() => handleNavigation('الرئيسية')} className="block py-2 text-gray-700 hover:text-primary-600 text-right">الرئيسية</button>
-              <button onClick={() => handleNavigation('سيارات للبيع')} className="block py-2 text-gray-700 hover:text-primary-600 text-right">سيارات للبيع</button>
-              <button onClick={() => handleNavigation('سيارات جديدة')} className="block py-2 text-gray-700 hover:text-primary-600 text-right">سيارات جديدة</button>
-              <button onClick={() => handleNavigation('سيارات مستعملة')} className="block py-2 text-gray-700 hover:text-primary-600 text-right">سيارات مستعملة</button>
-              <button onClick={() => handleNavigation('قطع غيار')} className="block py-2 text-gray-700 hover:text-primary-600 text-right">قطع غيار</button>
+              <Link to="/" className="block py-2 text-gray-700 hover:text-primary-600 text-right">الرئيسية</Link>
+              <Link to="/cars-for-sale" className="block py-2 text-gray-700 hover:text-primary-600 text-right">سيارات للبيع</Link>
+              <Link to="/new-cars" className="block py-2 text-gray-700 hover:text-primary-600 text-right">سيارات جديدة</Link>
+              <Link to="/used-cars" className="block py-2 text-gray-700 hover:text-primary-600 text-right">سيارات مستعملة</Link>
+              <Link to="/spare-parts" className="block py-2 text-gray-700 hover:text-primary-600 text-right">قطع غيار</Link>
+              <Link to="/services" className="block py-2 text-gray-700 hover:text-primary-600 text-right">خدمات</Link>
             </div>
 
             {/* Mobile Action Buttons */}
             <div className="flex flex-col gap-2 pt-4 border-t border-gray-100">
-              <Button variant="outline" className="w-full" onClick={handleMyAccount}>
-                <User className="w-4 h-4 ml-2" />
-                حسابي
-              </Button>
-              <Button className="w-full cars-gradient text-white" onClick={handleAddListing}>
-                أضف إعلانك
-              </Button>
+              <Link to="/my-account">
+                <Button variant="outline" className="w-full">
+                  <User className="w-4 h-4 ml-2" />
+                  حسابي
+                </Button>
+              </Link>
+              <Link to="/add-listing">
+                <Button className="w-full cars-gradient text-white">
+                  أضف إعلانك
+                </Button>
+              </Link>
             </div>
           </div>
         )}
