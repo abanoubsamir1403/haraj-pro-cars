@@ -29,53 +29,55 @@ const Header = () => {
   return (
     <header className="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
       <div className="container mx-auto px-4">
-        {/* Top Bar */}
-        <div className="flex justify-between items-center py-2 text-sm border-b border-blue-500/30">
-          <div className="text-blue-100">
-            🚗 أفضل موقع لبيع وشراء السيارات في المملكة العربية السعودية
-          </div>
-          <div className="flex gap-3">
-            <Link to="/login">
-              <Button variant="ghost" size="sm" className="text-blue-100 hover:text-white hover:bg-blue-500/30 transition-all duration-200">
-                تسجيل دخول
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button variant="ghost" size="sm" className="text-blue-100 hover:text-white hover:bg-blue-500/30 transition-all duration-200">
-                حساب جديد
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Main Header */}
-        <div className="flex items-center justify-between py-4">
+        {/* Single Line Header */}
+        <div className="flex items-center justify-between py-3">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 cursor-pointer group">
-            <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl group-hover:bg-white/30 transition-all duration-300">
-              <Car className="w-8 h-8 text-white" />
+          <Link to="/" className="flex items-center gap-2 cursor-pointer group">
+            <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg group-hover:bg-white/30 transition-all duration-300">
+              <Car className="w-6 h-6 text-white" />
             </div>
             <div className="text-white">
-              <h1 className="text-2xl font-bold">سيارات السعودية</h1>
-              <p className="text-xs text-blue-200">أفضل الصفقات</p>
+              <h1 className="text-lg font-bold">سيارات السعودية</h1>
             </div>
           </Link>
 
+          {/* Navigation Links - Desktop */}
+          <nav className="hidden lg:flex items-center gap-6">
+            <Link to="/" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105">
+              الرئيسية
+            </Link>
+            <Link to="/cars-for-sale" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105">
+              سيارات للبيع
+            </Link>
+            <Link to="/new-cars" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105">
+              سيارات جديدة
+            </Link>
+            <Link to="/used-cars" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105">
+              سيارات مستعملة
+            </Link>
+            <Link to="/spare-parts" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105">
+              قطع غيار
+            </Link>
+            <Link to="/services" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105">
+              خدمات
+            </Link>
+          </nav>
+
           {/* Search Bar - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-2xl mx-8">
+          <div className="hidden md:flex items-center gap-2 flex-1 max-w-md mx-6">
             <div className="relative w-full">
               <Input
                 type="text"
-                placeholder="ابحث عن سيارتك المثالية... (ماركة، موديل، سنة)"
+                placeholder="ابحث عن سيارتك..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                className="w-full pl-12 pr-4 py-3 text-gray-800 bg-white/95 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-orange-400 placeholder:text-gray-500 shadow-lg"
+                className="w-full pl-10 pr-4 py-2 text-gray-800 bg-white/95 backdrop-blur-sm border-0 rounded-lg focus:ring-2 focus:ring-orange-400 placeholder:text-gray-500"
               />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             </div>
             <Button 
-              className="mr-3 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl" 
+              className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-all duration-200" 
               onClick={handleSearch}
             >
               بحث
@@ -83,30 +85,26 @@ const Header = () => {
           </div>
 
           {/* Action Buttons - Desktop */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <Link to="/login">
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 rounded-lg">
+                تسجيل دخول
+              </Button>
+            </Link>
+            
             <Link to="/my-account">
-              <Button variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 rounded-xl px-4 py-2 backdrop-blur-sm">
-                <User className="w-4 h-4 ml-2" />
+              <Button variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 rounded-lg px-3 py-2">
+                <User className="w-4 h-4 ml-1" />
                 حسابي
               </Button>
             </Link>
             
             <Link to="/add-listing">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white rounded-xl px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-200">
-                <Plus className="w-4 h-4 ml-2" />
+              <Button className="bg-orange-500 hover:bg-orange-600 text-white rounded-lg px-4 py-2">
+                <Plus className="w-4 h-4 ml-1" />
                 أضف إعلانك
               </Button>
             </Link>
-
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="md:hidden text-white hover:bg-white/20 p-2 rounded-lg"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -119,30 +117,6 @@ const Header = () => {
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
         </div>
-
-        {/* Navigation */}
-        <nav className="hidden md:block pb-4">
-          <div className="flex gap-8 justify-center">
-            <Link to="/" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105 pb-1 border-b-2 border-transparent hover:border-orange-400">
-              🏠 الرئيسية
-            </Link>
-            <Link to="/cars-for-sale" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105 pb-1 border-b-2 border-transparent hover:border-orange-400">
-              🚗 سيارات للبيع
-            </Link>
-            <Link to="/new-cars" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105 pb-1 border-b-2 border-transparent hover:border-orange-400">
-              ✨ سيارات جديدة
-            </Link>
-            <Link to="/used-cars" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105 pb-1 border-b-2 border-transparent hover:border-orange-400">
-              🔄 سيارات مستعملة
-            </Link>
-            <Link to="/spare-parts" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105 pb-1 border-b-2 border-transparent hover:border-orange-400">
-              🔧 قطع غيار
-            </Link>
-            <Link to="/services" className="text-white/90 hover:text-white font-medium transition-all duration-200 hover:scale-105 pb-1 border-b-2 border-transparent hover:border-orange-400">
-              🛠️ خدمات
-            </Link>
-          </div>
-        </nav>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
@@ -165,27 +139,32 @@ const Header = () => {
             {/* Mobile Navigation Links */}
             <div className="space-y-3 mb-6">
               <Link to="/" className="block py-3 px-4 text-white hover:bg-white/20 rounded-xl transition-all duration-200">
-                🏠 الرئيسية
+                الرئيسية
               </Link>
               <Link to="/cars-for-sale" className="block py-3 px-4 text-white hover:bg-white/20 rounded-xl transition-all duration-200">
-                🚗 سيارات للبيع
+                سيارات للبيع
               </Link>
               <Link to="/new-cars" className="block py-3 px-4 text-white hover:bg-white/20 rounded-xl transition-all duration-200">
-                ✨ سيارات جديدة
+                سيارات جديدة
               </Link>
               <Link to="/used-cars" className="block py-3 px-4 text-white hover:bg-white/20 rounded-xl transition-all duration-200">
-                🔄 سيارات مستعملة
+                سيارات مستعملة
               </Link>
               <Link to="/spare-parts" className="block py-3 px-4 text-white hover:bg-white/20 rounded-xl transition-all duration-200">
-                🔧 قطع غيار
+                قطع غيار
               </Link>
               <Link to="/services" className="block py-3 px-4 text-white hover:bg-white/20 rounded-xl transition-all duration-200">
-                🛠️ خدمات
+                خدمات
               </Link>
             </div>
 
             {/* Mobile Action Buttons */}
             <div className="space-y-3 pt-4 border-t border-white/20">
+              <Link to="/login">
+                <Button variant="outline" className="w-full bg-white/10 border-white/30 text-white hover:bg-white/20 rounded-xl">
+                  تسجيل دخول
+                </Button>
+              </Link>
               <Link to="/my-account">
                 <Button variant="outline" className="w-full bg-white/10 border-white/30 text-white hover:bg-white/20 rounded-xl">
                   <User className="w-4 h-4 ml-2" />
