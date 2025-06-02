@@ -1,4 +1,6 @@
 
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
@@ -40,11 +42,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">روابط سريعة</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">عن الموقع</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">كيف يعمل الموقع</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">الشروط والأحكام</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">سياسة الخصوصية</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">اتفاقية المستخدم</a></li>
+              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">عن الموقع</Link></li>
+              <li><Link to="/how-it-works" className="text-gray-300 hover:text-white transition-colors">كيف يعمل الموقع</Link></li>
+              <li><Link to="/terms" className="text-gray-300 hover:text-white transition-colors">الشروط والأحكام</Link></li>
+              <li><Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">سياسة الخصوصية</Link></li>
+              <li><Link to="/user-agreement" className="text-gray-300 hover:text-white transition-colors">اتفاقية المستخدم</Link></li>
             </ul>
           </div>
 
@@ -52,11 +54,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">الفئات</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">سيارات للبيع</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">سيارات جديدة</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">سيارات مستعملة</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">قطع غيار</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">خدمات السيارات</a></li>
+              <li><Link to="/cars-for-sale" className="text-gray-300 hover:text-white transition-colors">سيارات للبيع</Link></li>
+              <li><Link to="/new-cars" className="text-gray-300 hover:text-white transition-colors">سيارات جديدة</Link></li>
+              <li><Link to="/used-cars" className="text-gray-300 hover:text-white transition-colors">سيارات مستعملة</Link></li>
+              <li><Link to="/spare-parts" className="text-gray-300 hover:text-white transition-colors">قطع غيار</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">خدمات السيارات</Link></li>
             </ul>
           </div>
 
