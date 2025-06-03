@@ -1,16 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const FeaturedCars = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleViewDetails = (carName: string) => {
-    toast({
-      title: "عرض التفاصيل",
-      description: `سيتم إضافة صفحة تفاصيل ${carName} قريباً`,
-    });
+  const handleViewDetails = (carId: number) => {
+    navigate(`/car-details/${carId}`);
   };
 
   const handleCallNow = (carName: string) => {
@@ -21,10 +19,7 @@ const FeaturedCars = () => {
   };
 
   const handleViewAllCars = () => {
-    toast({
-      title: "جميع السيارات",
-      description: "سيتم إضافة صفحة جميع السيارات قريباً",
-    });
+    navigate('/cars-for-sale');
   };
 
   const featuredCars = [
@@ -158,7 +153,7 @@ const FeaturedCars = () => {
                 <div className="flex gap-2">
                   <Button 
                     className="flex-1 cars-gradient text-white hover:shadow-lg"
-                    onClick={() => handleViewDetails(`${car.brand} ${car.model}`)}
+                    onClick={() => handleViewDetails(car.id)}
                   >
                     عرض التفاصيل
                   </Button>

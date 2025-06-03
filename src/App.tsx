@@ -22,6 +22,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import UserAgreement from "./pages/UserAgreement";
+import CarDetails from "./pages/CarDetails";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/cars-for-sale" element={<CarsForSale />} />
           <Route path="/new-cars" element={<NewCars />} />
           <Route path="/used-cars" element={<UsedCars />} />
+          <Route path="/car-details/:id" element={<CarDetails />} />
           <Route path="/spare-parts" element={<SpareParts />} />
           <Route path="/services" element={<Services />} />
           <Route path="/login" element={<Login />} />

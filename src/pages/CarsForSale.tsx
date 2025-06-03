@@ -6,12 +6,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search, Filter } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CarsForSale = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [priceRange, setPriceRange] = useState('');
+  const navigate = useNavigate();
 
   const cars = [
     {
@@ -28,6 +30,10 @@ const CarsForSale = () => {
     },
     // ... المزيد من السيارات
   ];
+
+  const handleViewDetails = (carId: number) => {
+    navigate(`/car-details/${carId}`);
+  };
 
   return (
     <div className="min-h-screen font-arabic bg-gray-50">
@@ -122,7 +128,10 @@ const CarsForSale = () => {
                 </div>
 
                 <div className="flex gap-2 mb-4">
-                  <Button className="flex-1 cars-gradient text-white">
+                  <Button 
+                    className="flex-1 cars-gradient text-white"
+                    onClick={() => handleViewDetails(car.id)}
+                  >
                     عرض التفاصيل
                   </Button>
                   <Button variant="outline" className="flex-1">

@@ -1,14 +1,15 @@
-
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UsedCars = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const carsPerPage = 6;
+  const navigate = useNavigate();
 
   const allUsedCars = [
     {
@@ -150,6 +151,10 @@ const UsedCars = () => {
     }
   };
 
+  const handleViewDetails = (carId: number) => {
+    navigate(`/car-details/${carId}`);
+  };
+
   return (
     <div className="min-h-screen font-arabic bg-gray-50">
       <Header />
@@ -199,7 +204,10 @@ const UsedCars = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <Button className="flex-1 cars-gradient text-white">
+                  <Button 
+                    className="flex-1 cars-gradient text-white"
+                    onClick={() => handleViewDetails(car.id)}
+                  >
                     عرض التفاصيل
                   </Button>
                   <Button variant="outline" className="flex-1">
